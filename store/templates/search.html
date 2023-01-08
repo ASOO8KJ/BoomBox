@@ -1,0 +1,101 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+{% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top">
+    <div class="container ">
+      <a class="navbar-brand"href="#"><b style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size:33px;color:blue"><i class="bi bi-headset"></i>BoomBox</b></a>
+      <!-- <div ><input type="search" placeholder="search products" style="margin-left:210px;width:300px;height:40px;border-color: rgb(249 241 241);border-radius:4px;"></div> -->
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"> -->
+        <!-- <span class="navbar-toggler-icon"></span> -->
+    <div>
+         <form class="d-flex" role="search" method="POST">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" style="margin-left:250px; margin-top:25px">&nbsp;
+            <button class="btn btn-outline-success" style="height: 40px;margin-top:25px"  type="submit" >Search</button>
+          </form>
+      </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto" >
+          <a class="nav-link active" aria-current="page" href="/" style="color:black;">Home</a>
+          {% comment %} <a class="nav-link active" href="/products">Products</a>
+          
+          <a class="nav-link active" href="/myprofile">Myprofile</a>
+          <a class="nav-link active" href="/signout/">Logout</a> {% endcomment %}
+          {% comment %} <a class="nav-link active" aria-current="page" href="/product1"style="color:black">Products</a>
+          
+          <a class="nav-link active" aria-current="page" href="/register"style="color:black">Register</a>
+          <a class="nav-link active" aria-current="page" href="/user_login"style="color:black">Login</a>
+
+          
+          
+        </div>
+      </div>
+    </div>
+  </nav> {% endcomment %}
+  {% comment %} <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" style="margin-top: 80px;">
+      <div class="carousel-item active">
+        <img src="{% static 'images/banner4.webp' %}" class="d-block w-100 "  height=600px alt="slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner7.jpg' %}" class="d-block w-100"height=600px alt="slide 2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner5.webp' %}" class="d-block w-100" height=600px alt="slide 3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- welcome>>{{user.username}} --> {% endcomment %}
+
+  <div class="container">
+    <h3 class="my-4 border-bottom pb-1"><span class="text-muted">Search result for</span>{{request.GET.q}}"</h3>
+    <div class="row">
+  {% for i in data %}
+                    <div class="col-md-3">
+                        <div class="card text-center border-2  " style="height:340px;margin-top:20px;">
+                            <div class="card-body">
+                  
+                                <img width=160px; height=170px; src="images/{{i.image1}}">
+                                </a>
+                                <h1 style="font-size:20px;">{{i.product_name}}</h1><br>
+                               
+                                <p class="card-text">
+                                   
+                                    
+                                </p>
+                                <h4 class="price" style="margin-top:-40px;font-size:20px;color:gray;"> </h4>
+                                
+                                
+                                    
+                            
+                                <button class="btn btn-primary"><a href="/product_details/{{i.id}}"><b style="color:white;">View More</b></a></button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+</div>
+
+
+
+
+
+        
+
+{% endblock %}

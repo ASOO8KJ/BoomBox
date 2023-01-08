@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+
+  <div class="services">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body" style="margin-top:100px;">
+              <h5 class="card-title">Address</h5>
+              <p class="card-text">Name: {{ i.order.address.buyer_name }}</p>
+              <p class="card-text">Addres: {{ i.order.address.address }} {{ i.order.address.pincode }}</p>
+              <p class="card-text">City: {{ i.order.address.city }}</p>
+              <p class="card-text">State: {{ i.order.address.state }}</p>
+              <p class="card-text">Country: {{ i.order.address.country }}</p>
+              <p class="card-text">Order Date: {{ i.order.created_at }}</p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="row">
+          <div class="col-12">
+              <table class="table">
+                  <thead>
+                    <tr align="center">
+                      <th scope="col">Image</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Total Price</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Status</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr align="center">
+                      <td><img src="{{ i.product.image1.url }}" height="100px" alt="" style= "width:100px;" ></td>
+                      <td>{{i.product.product_name}}</td>
+                      <td>₹ {{i.product.price}}</td>
+                      <td>₹ {% widthratio i.product.price 1 i.quantity %}</td>
+                      <td>{{i.quantity}}</td>
+                      {% if i.ordered is False %}
+                      <td>{{ i.status }}</td> 
+                      {% if i.status != "Delivered" %}
+                      <td><button class="btn-danger"><a href="/user_cancel_order/{{i.id}}" style="text-decoration: None;color: white;">Cancel</a></button>
+                        {% else %}
+                        <td><button><a href="/user_order_returned/{{i.id}}" style="text-decoration: None;">Return</a></button>
+                          {% endif %}
+                      <button class="btn-primary"><a href="/download/{{i.id}}" style="text-decoration: None;color: white;">Download Invoice</a></button></td>
+                      {% elif i.ordered is True %}
+                      <td>{{ "Cancelled" }}</td>
+                      {% endif %}
+                      </td>
+                      
+                    </tr>
+                    
+                  </tbody>
+                </table>
+                
+          </div>
+          
+        
+      </div>
+
+      
+    </div>
+  </div>
+
+
+        
+
+{% endblock %}

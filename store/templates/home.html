@@ -1,0 +1,144 @@
+
+{%extends 'main.html'%}
+{% load static %}
+{% block content %}
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" style="margin-top: 80px;">
+      <div class="carousel-item active">
+        <img src="{% static 'images/banner4.webp' %}" class="d-block w-100 "  height=600px alt="slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner7.jpg' %}" class="d-block w-100"height=600px alt="slide 2">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'images/banner5.webp' %}" class="d-block w-100" height=600px alt="slide 3">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- welcome>>{{user.username}} -->
+  <div class="container">
+    <div class="row">
+  {% for i in data %}
+                    <div class="col-md-3">
+                        <div class="card text-center border-2  " style="height:340px;margin-top:20px;">
+                            <div class="card-body">                  
+                                <img width=160px; height=170px; src="images/{{i.image1}}">
+                                </a>
+                                <h1 style="font-size:20px;">{{i.product_name}}</h1><br>                               
+                                <p class="card-text">                            
+                                </p>
+                                <h4 class="price" style="margin-top:-40px;font-size:20px;color:gray;">₹{{i.price}}</h4>
+                                <button class="btn btn-primary"><a href="/product_details/{{i.id}}"><b style="color:white;">View More</b></a></button>
+                                {% comment %} <button class="btn btn-primary"><a href="{{i.id}}"><b style="color:white;">Add to Cart</b></a></button> {% endcomment %}
+                                {% comment %} <input type="submit" name="cart_button" class="filled-button " value="Add to Cart" style="background-color: blue;border-color:blue;color:white;margin-top:30px ;"> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+</div>
+
+
+
+
+
+
+
+
+       <!-- Footer Starts Here -->
+       
+       <footer>
+        <div class="container " >
+          <div class="row " style="margin-top:100px; ">
+            <hr class="bg-danger border-2 border-top border-dark">
+            <div class="col-md-3 footer-item ">
+              <h4>BoomBox </h4>
+              <p>Vivamus tellus mi. Nulla ne cursus elit,vulputate. Sed ne cursus augue hasellus lacinia sapien vitae.</p>
+              <ul class="social-icons">
+                <li><a rel="nofollow" href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+              </ul>
+            </div>
+            <div class="col-md-3 footer-item">
+              <h4>Useful Links</h4>
+              <ul class="menu-list">
+                <li>Vivamus ut tellus mi</li>
+                <li>Nulla nec cursus elit</li>
+                <li>Vulputate sed nec</li>
+                <li>Cursus augue hasellus</li>
+                <li>Lacinia ac sapien</li>
+              </ul>
+            </div>
+            <div class="col-md-3 footer-item">
+              <h4>Additional Pages</h4>
+              <ul class="menu-list">
+                <li>Products</li>
+                <li>About Us</li>
+                <li>Blog</li>
+                <li>Contact Us</li>
+                <li>Terms</li>
+              </ul>
+            </div>
+            <div class="col-md-3 footer-item last-item">
+              <h4>Contact Us</h4>
+              <div class="contact-form">
+                <form id="contact footer-contact" action="" method="post">
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <fieldset>
+                        <input name="name" type="text" class="form-control" id ="name" placeholder="Full Name" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <fieldset>
+                        <input name="email" type="text" class="form-control" id="email" pattern="[^ @]*@[^ @]*" placeholder="E-Mail Address" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="filled-button">Send Message</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+      
+      <div class="sub-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <p>
+                  Copyright © 2020 Company Name
+                 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+{% endblock %}
+
+

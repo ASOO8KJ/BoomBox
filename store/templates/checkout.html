@@ -1,0 +1,123 @@
+{% extends 'main.html' %}
+{% block content %}
+{% load static %}
+
+  <form method="post">
+    {% csrf_token %}
+  <div class="row">
+    <div class="col-9">
+        <table class="table" style="margin-top:100px;">
+            <thead>
+              <tr align="center">
+                <th scope="col">Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in cart %}
+              <tr align="center">
+                <td><img src="/images/{{ i.product_id.image1}}"height="100px" alt="" style= "width:100px;" ></td>
+                <td>{{i.product_id.product_name}}</td>
+                <td>₹ {{i.product_id.price}}</td>
+                <td><span>&nbsp;&nbsp;<b>{{ i.product_qty }}</b>&nbsp;&nbsp;</span></td>
+                <td>{{i.user_id.name}}</td>
+              </tr>
+            {% endfor %}
+              
+            </tbody>
+          </table>
+    </div>
+    <div class="col-3">
+        <div class="card mb-4" style="margin-top: 80px;">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Summary</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Products
+                  <span>₹ {{ total1 }}</span>
+                </li>
+               {% if coupan_price is not 0 %}
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Coupan Aplied
+                  <span>₹ {{coupan_price}}</span>
+                </li>
+                {% endif %}
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Shipping
+                  <span>₹ 0</span>
+                </li>
+                {% if coupan_price is  0 %}
+                 <a href="/apply_coupan"> <input  value="Apply Coupon" class="btn btn-primary  btn-block" style="margin-left:50px;"> </a> 
+                
+                {% endif %} 
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount</strong>
+                    <strong>
+                      <p class="mb-0">(including TAX)</p>
+                    </strong>
+                  </div>
+                  <span><strong>₹ {{ total }}</strong></span>
+                  
+                </li>
+               
+              <div>
+              <div class="form-group">
+                <select name="payment_method" class="form-control" required>
+                     <option value="">Select Payment</option>
+                     <option value="COD">CASH ON DELIVERY</option>
+                      <option value="paypal">Paypal</option>
+                     <option value="razorpay">Razorpay</option> 
+                </select>
+            </div>
+              <input type="submit" value="place order" class="btn btn-success  btn-block" style="margin-top:10px;margin-left:90px;">
+            </div>
+            </ul>
+    </div>
+</div >
+</div>
+</div>
+
+  
+  <div class="address">
+    <a href="/add_address" >
+      <h3>ADD</h3>
+    </a>
+  </div>
+
+ 
+  <div class="container-fluid ">
+    <div class="">
+      <div class="form-group">
+           <select name="selected_address" class="form-control" style="width: 500px;" required>
+                {% for i in address %}
+                <option value="{{ i.id }}">
+                    <div>{{ i.id }}</div>
+                    <div>{{ i.buyer_name }},</div>
+                    <div>{{ i.address }},</div>
+                    <div>{{ i.pincode }},</div>
+                    <div>{{ i.city }},</div>
+                    <div>{{ i.state }}</div>
+                    <div>({{ i.buyer_phone }})</div>
+                </option>
+                {% endfor %}
+           </select>
+      </div>
+ </div>
+</div>
+
+</form> 
+
+
+
+
+        
+
+{% endblock %}
